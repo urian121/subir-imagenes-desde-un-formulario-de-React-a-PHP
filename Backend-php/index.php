@@ -42,7 +42,7 @@ switch ($metodo) {
             if (in_array($extension, $extensionesPermitidas)) {
 
                 // Generar un nombre único y seguro para el archivo
-                $nombreArchivo = substr(md5(uniqid(rand())), 0, 15) . "." . $extension;
+                $nombreArchivo = substr(md5(uniqid(rand())), 0, 10) . "." . $extension;
                 $rutaDestino = $dirLocal . '/' . $nombreArchivo;
 
                 // Mover el archivo a la ubicación deseada
