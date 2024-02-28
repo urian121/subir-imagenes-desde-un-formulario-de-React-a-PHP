@@ -1,45 +1,27 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-function ListaImagenes() {
-  const [imagenes, setImagenes] = useState([]);
-
-  const rutaRelativa =
-    "http://localhost/como-subir-imagenes-desde-un-formulario-con-react/Backend-php/imgs/";
-  useEffect(() => {
-    const obtenerImagenes = async () => {
-      try {
-        const URL_API =
-          "http://localhost/como-subir-imagenes-desde-un-formulario-con-react/Backend-php/";
-        const response = await axios.get(URL_API);
-        setImagenes(response.data);
-      } catch (error) {
-        console.error("Error al obtener las imágenes:", error);
-      }
-    };
-
-    obtenerImagenes();
-  }, []);
-
-  if (imagenes.length === 0) {
-    return <p>No hay imágenes disponibles.</p>;
-  }
-
+function ListaImagenes({ data, url_api }) {
   return (
-    <div>
-      <h2>Lista de Imágenes</h2>
-      <ul>
-        {imagenes.map((imagen, index) => (
-          <div key={index}>
+    <>
+      <h2>
+        Lista de Imágenes <hr />
+      </h2>
+      <div className="d-flex flex-wrap">
+        {data.map((imagen, index) => (
+          <div key={index} className="mr-2 mb-2">
             <img
-              src={rutaRelativa + imagen}
+              className="rounded"
+              src={`${url_api}/imgs/${imagen}`}
               alt="Imagen"
-              style={{ width: "100px" }}
+              style={{
+                width: "150px",
+                marginRight: "30px",
+                background: "#f4f4f4",
+                marginBottom: "30px",
+              }}
             />
           </div>
         ))}
-      </ul>
-    </div>
+      </div>
+    </>
   );
 }
 
